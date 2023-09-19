@@ -263,6 +263,263 @@ enum class EBeamFunction: uint8
 	TimeSharedJamming,
 };
 
+UENUM(BlueprintType)
+enum class EArtPartTypeMetric : uint8
+{
+	NotSpecified = 0,
+	Position = 1,
+	PositionRate = 2,
+	Extension = 3,
+	ExtensionRate = 4,
+	X = 5,
+	XRate = 6,
+	Y = 7,
+	YRate = 8,
+	Z = 9,
+	ZRate = 10,
+	Azimuth = 11,
+	AzimuthRate = 12,
+	Elevation = 13,
+	ElevationRate = 14,
+	Rotation = 15,
+	RotationRate = 16,
+};
+
+/*
+* Since UE only supports uint8 Enums, we can only have the first 256 values.
+* The DIS enum is defined as multiples of 32 in the range 1,024 - 4,294,967,264
+* The formula from the DIS enum value is ((x - 1024) / 32) + 1 for the non zero values.
+*/
+UENUM(BlueprintType)
+enum class EArtPartTypeClass : uint8
+{
+	NotSpecified = 0,
+	Rudder = 1,
+	LeftFlap = 2,
+	RightFlap = 3,
+	LeftAileron = 4,
+	RightAileron = 5,
+	HelicopterMainRotor = 6,
+	HelicopterTailRotor = 7,
+	OtherAircraftControlSurfacesDefinedasNeeded = 8,
+	PropellerNumber1 = 9,
+	PropellerNumber2 = 10,
+	PropellerNumber3 = 11,
+	PropellerNumber4 = 12,
+	LeftStabilatorStabilatorNumber1 = 13,
+	RightStabilatorStabilatorNumber2 = 14,
+	LeftRuddervatorRuddervatorNumber1 = 15,
+	RightRuddervatorRuddervatorNumber2 = 16,
+	LeftLeadingEdgeFlapSlat = 17,
+	RightLeadingEdgeFlapSlat = 18,
+	LeftElevator = 19,
+	RightElevator = 20,
+	CanardLeft = 21,
+	CanardRight = 22,
+	ElevonInnerLeft = 23,
+	ElevonInnerRight = 24,
+	ElevonMiddleLeft = 25,
+	ElevonMiddleRight = 26,
+	ElevonOuterLeft = 27,
+	ElevonOuterRight = 28,
+	CanopyAircraft = 29,
+	Periscope = 33,
+	GenericAntenna = 34,
+	Snorkel = 35,
+	OtherExtendiblePartsDefinedasNeeded = 36,
+	DivePlaneSailLeft = 37,
+	DivePlaneSailRight = 38,
+	DivePlaneBowLeft = 39,
+	DivePlaneBowRight = 40,
+	DivePlaneSternLeft = 41,
+	DivePlaneSternRight = 42,
+	LandingGear287 = 65,
+	TailHook = 66,
+	SpeedBrake = 67,
+	LeftDoorofPrimaryWeaponBay = 68,
+	RightDoorofPrimaryWeaponBay = 69,
+	TankorAPCHatch = 70,
+	Wingsweep = 71,
+	BridgeLauncher = 72,
+	BridgeSection1 = 73,
+	BridgeSection2 = 74,
+	BridgeSection3 = 75,
+	PrimaryBlade1 = 76,
+	PrimaryBlade2 = 77,
+	PrimaryBoom = 78,
+	PrimaryLauncherArm = 79,
+	OtherFixedPositionPartsDefinedasNeeded = 80,
+	LandingGearNose = 81,
+	LandingGearLeftMain = 82,
+	LandingGearRightMain = 83,
+	DoorsofLeftSideWeaponBay = 84,
+	DoorsofRightSideWeaponBay = 85,
+	SpotSearchLight1 = 86,
+	SpotSearchLight2 = 87,
+	SpotSearchLight3 = 88,
+	SpotSearchLight4 = 89,
+	LandingLight = 90,
+	PrimaryTurretNumber1 = 97,
+	PrimaryTurretNumber2 = 98,
+	PrimaryTurretNumber3 = 99,
+	PrimaryTurretNumber4 = 100,
+	PrimaryTurretNumber5 = 101,
+	PrimaryTurretNumber6 = 102,
+	PrimaryTurretNumber7 = 103,
+	PrimaryTurretNumber8 = 104,
+	PrimaryTurretNumber9 = 105,
+	PrimaryTurretNumber10 = 106,
+	PrimaryGunNumber1 = 107,
+	PrimaryGunNumber2 = 108,
+	PrimaryGunNumber3 = 109,
+	PrimaryGunNumber4 = 110,
+	PrimaryGunNumber5 = 111,
+	PrimaryGunNumber6 = 112,
+	PrimaryGunNumber7 = 113,
+	PrimaryGunNumber8 = 114,
+	PrimaryGunNumber9 = 115,
+	PrimaryGunNumber10 = 116,
+	PrimaryLauncher1 = 117,
+	PrimaryLauncher2 = 118,
+	PrimaryLauncher3 = 119,
+	PrimaryLauncher4 = 120,
+	PrimaryLauncher5 = 121,
+	PrimaryLauncher6 = 122,
+	PrimaryLauncher7 = 123,
+	PrimaryLauncher8 = 124,
+	PrimaryLauncher9 = 125,
+	PrimaryLauncher10 = 126,
+	PrimaryDefenseSystems1288 = 127,
+	PrimaryDefenseSystems2 = 128,
+	PrimaryDefenseSystems3 = 129,
+	PrimaryDefenseSystems4 = 130,
+	PrimaryDefenseSystems5 = 131,
+	PrimaryDefenseSystems6 = 132,
+	PrimaryDefenseSystems7 = 133,
+	PrimaryDefenseSystems8 = 134,
+	PrimaryDefenseSystems9 = 135,
+	PrimaryDefenseSystems10 = 136,
+	PrimaryRadar1289 = 137,
+	PrimaryRadar2 = 138,
+	PrimaryRadar3 = 139,
+	PrimaryRadar4 = 140,
+	PrimaryRadar5 = 141,
+	PrimaryRadar6 = 142,
+	PrimaryRadar7 = 143,
+	PrimaryRadar8 = 144,
+	PrimaryRadar9 = 145,
+	PrimaryRadar10 = 146,
+	SecondaryTurretNumber1 = 147,
+	SecondaryTurretNumber2 = 148,
+	SecondaryTurretNumber3 = 149,
+	SecondaryTurretNumber4 = 150,
+	SecondaryTurretNumber5 = 151,
+	SecondaryTurretNumber6 = 152,
+	SecondaryTurretNumber7 = 153,
+	SecondaryTurretNumber8 = 154,
+	SecondaryTurretNumber9 = 155,
+	SecondaryTurretNumber10 = 156,
+	SecondaryGunNumber1 = 157,
+	SecondaryGunNumber2 = 158,
+	SecondaryGunNumber3 = 159,
+	SecondaryGunNumber4 = 160,
+	SecondaryGunNumber5 = 161,
+	SecondaryGunNumber6 = 162,
+	SecondaryGunNumber7 = 163,
+	SecondaryGunNumber8 = 164,
+	SecondaryGunNumber9 = 165,
+	SecondaryGunNumber10 = 166,
+	SecondaryLauncher1 = 167,
+	SecondaryLauncher2 = 168,
+	SecondaryLauncher3 = 169,
+	SecondaryLauncher4 = 170,
+	SecondaryLauncher5 = 171,
+	SecondaryLauncher6 = 172,
+	SecondaryLauncher7 = 173,
+	SecondaryLauncher8 = 174,
+	SecondaryLauncher9 = 175,
+	SecondaryLauncher10 = 176,
+	SecondaryDefenseSystems1 = 177,
+	SecondaryDefenseSystems2 = 178,
+	SecondaryDefenseSystems3 = 179,
+	SecondaryDefenseSystems4 = 180,
+	SecondaryDefenseSystems5 = 181,
+	SecondaryDefenseSystems6 = 182,
+	SecondaryDefenseSystems7 = 183,
+	SecondaryDefenseSystems8 = 184,
+	SecondaryDefenseSystems9 = 185,
+	SecondaryDefenseSystems10 = 186,
+	SecondaryRadar1 = 187,
+	SecondaryRadar2 = 188,
+	SecondaryRadar3 = 189,
+	SecondaryRadar4 = 190,
+	SecondaryRadar5 = 191,
+	SecondaryRadar6 = 192,
+	SecondaryRadar7 = 193,
+	SecondaryRadar8 = 194,
+	SecondaryRadar9 = 195,
+	SecondaryRadar10 = 196,
+	DeckElevator1 = 197,
+	DeckElevator2 = 198,
+	Catapult1 = 199,
+	Catapult2 = 200,
+	JetBlastDeflector1 = 201,
+	JetBlastDeflector2 = 202,
+	ArrestorWires1 = 203,
+	ArrestorWires2 = 204,
+	ArrestorWires3 = 205,
+	WingorRotorFold = 206,
+	FuselageFold = 207,
+	MainCargoDoor = 208,
+	CargoRamp = 209,
+	AirtoAirRefuelingBoom = 210,
+	PrimaryAerialRefuelingReceptacleDoor = 211,
+	SecondaryAerialRefuelingReceptacleDoor = 212,
+	AerialRefuelingReceptacleLatch = 213,
+	CargoDoor1 = 214,
+	CargoDoor2 = 215,
+	CargoDoor3 = 216,
+	CargoDoor4 = 217,
+	CargoDoor5 = 218,
+	CargoDoor6 = 219,
+	CargoDoor7 = 220,
+	CargoDoor8 = 221,
+	CargoDoor9 = 222,
+	CargoDoor10 = 223,
+	CentreRefuellingDrogue = 224,
+	PortRefuellingDrogue = 225,
+	StarboardRefuellingDrogue = 226,
+	SubmarineEngineExhaustMast = 227,
+	SubmarineMast1290 = 228,
+	SubmarineMast2 = 229,
+	SubmarineMast3 = 230,
+	SubmarineMast4 = 231,
+	SubmarineMast5 = 232,
+	SubmarineMast6 = 233,
+	SubmarineMast7 = 234,
+	SubmarineMast8 = 235,
+	SubmarineMast9 = 236,
+	SubmarineMast10 = 237,
+	VectoredThrustNozzle = 238,
+	LeftDooroftheLeftWeaponBay = 239,
+	RightDooroftheLeftWeaponBay = 240,
+	LeftDooroftheRightWeaponBay = 241,
+	RightDooroftheRightWeaponBay = 242,
+	GunDoor = 243,
+	CountermeasureDoorLeft = 244,
+	CountermeasureDoorRight = 245,
+	HookDoorForward = 246,
+	HookDoorAft = 247,
+	LiftFanUpperDoor = 248,
+	LiftFanLowerDoorLeft = 249,
+	LiftFanLowerDoorRight = 250,
+	RefuelProbeDoor = 251,
+	LeftEngineNacelle = 252,
+	RightEngineNacelle = 253,
+	LeftWheel1st = 254,
+	RightWheel1st = 255,
+};
+
 USTRUCT(BlueprintType)
 struct FEastNorthUp
 {
@@ -774,6 +1031,12 @@ struct FArticulationParameters
 	/** The type class (multiples of 32 in the range 1,024 - 4,294,967,264) and type metric (0 - 31) of the articulated part. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GRILL DIS|Structs")
 		int32 ParameterType;
+	/** The type class (multiples of 32 in the range 1,024 - 4,294,967,264) of the articulated part. */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GRILL DIS|Structs")
+		EArtPartTypeClass ParameterTypeClass;
+	/** The type metric (0 - 31) of the articulated part. */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GRILL DIS|Structs")
+		EArtPartTypeMetric ParameterTypeMetric;
 	/** The parameter value as defined by the ParameterType variable. Will only be utilized if the Parameter Type Designator is an articulated part (0). */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GRILL DIS|Structs")
 		float ParameterValue;
@@ -787,6 +1050,8 @@ struct FArticulationParameters
 		ChangeIndicator = 0;
 		PartAttachedTo = 0;
 		ParameterType = 0;
+		ParameterTypeClass = EArtPartTypeClass::NotSpecified;
+		ParameterTypeMetric = EArtPartTypeMetric::NotSpecified;
 		ParameterValue = 0.f;
 	}
 
@@ -809,6 +1074,21 @@ struct FArticulationParameters
 
 		return OutParam;
 	}
+	// From the spec DIS IEEE Std 1278.1-199
+	//
+	//An articulated parameter type consists of two components (figure A.1). The first component, consisting of
+	//the least significant 5 bits of the Parameter Type field, defines the type metric. The type metric determines
+	//which of the transformations described in A.2.1.4 are specified by this parameter type. The second component,
+	//consisting of the next 27 bits of the Parameter Type field, defines the type class.
+    static EArtPartTypeMetric getParameterTypeMetric(int ParameterType) {
+        return static_cast<EArtPartTypeMetric>(ParameterType & 0x1f);
+    }
+
+    static EArtPartTypeClass getParameterTypeClass(int ParameterType) {
+        return ParameterType == 0 
+			? EArtPartTypeClass::NotSpecified 
+			: static_cast<EArtPartTypeClass>((((ParameterType >> 5) - 1024)/32)+1);
+    }
 };
 
 USTRUCT(BlueprintType)

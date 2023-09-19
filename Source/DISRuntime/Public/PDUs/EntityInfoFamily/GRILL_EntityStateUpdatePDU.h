@@ -85,6 +85,8 @@ struct FEntityStateUpdatePDU : public FEntityInformationFamilyPDU
 			newArtParam.ChangeIndicator = tempArtParam.getChangeIndicator();
 			newArtParam.PartAttachedTo = tempArtParam.getPartAttachedTo();
 			newArtParam.ParameterType = tempArtParam.getParameterType();
+			newArtParam.ParameterTypeClass = FArticulationParameters::getParameterTypeClass(tempArtParam.getParameterType());
+			newArtParam.ParameterTypeMetric = FArticulationParameters::getParameterTypeMetric(tempArtParam.getParameterType());
 
 			if (newArtParam.ParameterTypeDesignator == 0)
 			{
